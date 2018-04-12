@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Box2D Optimizer API reference</title>
+    <title>Box2D Optimizer</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -223,10 +223,32 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="introduction">Introduction</a>
           </li>
           <li>
+            <a href="#install-build-and-run" class="toc-h1 toc-link" data-title="install-build-and-run">Install, Build and Run</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#install-dependencies" class="toc-h2 toc-link" data-title="install-dependencies">Install dependencies</a>
+                  </li>
+                  <li>
+                    <a href="#build" class="toc-h2 toc-link" data-title="build">Build</a>
+                  </li>
+                  <li>
+                    <a href="#run" class="toc-h2 toc-link" data-title="run">Run</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#get-block-poses" class="toc-h1 toc-link" data-title="get-block-poses">Get Block Poses</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#http-request" class="toc-h2 toc-link" data-title="http-request">HTTP Request</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#q-amp-a" class="toc-h1 toc-link" data-title="q-amp-a">Q&amp;A</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#why-don-39-t-use-ros-to-communicate" class="toc-h2 toc-link" data-title="why-don-t-use-ros-to-communicate">Why don't use ROS to communicate?</a>
                   </li>
               </ul>
           </li>
@@ -239,8 +261,29 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome! You can use our API to access Box2D optimizer API.</p>
-<h1 id='get-block-poses'>Get Block Poses</h1>
+<p>For more detailed explanation of this optimizer, refer to <a href="https://github.com/leonidk/Box2D/blob/master/README.md">upstream&#39;s REAMDE written by Leo and Alex</a>. This one is a simplified version.</p>
+<h1 id='install-build-and-run'>Install, Build and Run</h1><h2 id='install-dependencies'>Install dependencies</h2>
+<p>Create a virtual environment of Python3. Python2 is not capatible since <a href="https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists">Unpacking Argument Lists</a> is not available in Python2. How to create a virtual environment? It&#39;s 1:30 a.m. and I&#39;m too tired. just search on Google and learn something.</p>
+
+<blockquote>
+<p>To install python dependencies, use this code:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>pip install -r requirements.txt
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># It can't be</span>
+</code></pre><h2 id='build'>Build</h2>
+<blockquote>
+<p>To build C++ code, run this</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>./premake5 gmake
+<span class="nb">cd </span>Build/gmake/
+make -j -l <span class="nv">config</span><span class="o">=</span>release
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># It can't be</span>
+</code></pre><h2 id='run'>Run</h2>
+<blockquote>
+<p>To spin up the API server, run this</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>python server.py
+</code></pre><h1 id='get-block-poses'>Get Block Poses</h1>
 <blockquote>
 <p>To get pose, use this code:</p>
 </blockquote>
@@ -344,6 +387,8 @@ curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <spa
 <aside class="notice">
 Expect about 40 seconds to get answer.
 </aside>
+<h1 id='q-amp-a'>Q&amp;A</h1><h2 id='why-don-39-t-use-ros-to-communicate'>Why don&#39;t use ROS to communicate?</h2>
+<p>Because ROS Kinetic does not support Python3.</p>
 
       </div>
       <div class="dark-box">
