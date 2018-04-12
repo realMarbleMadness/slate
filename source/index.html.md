@@ -1,5 +1,5 @@
 ---
-title: Box2D Optimizer API reference
+title: Box2D Optimizer
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
@@ -13,8 +13,45 @@ search: true
 
 # Introduction
 
-Welcome! You can use our API to access Box2D optimizer API.
+For more detailed explanation of this optimizer, refer to [upstream's REAMDE written by Leo and Alex](https://github.com/leonidk/Box2D/blob/master/README.md). This one is a simplified version.
 
+# Install, Build and Run
+
+## Install dependencies
+
+Create a virtual environment of Python3. Python2 is not capatible since [Unpacking Argument Lists](https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists) is not available in Python2. How to create a virtual environment? It's 1:30 a.m. and I'm too tired. just search on Google and learn something.
+
+> To install python dependencies, use this code:
+
+```shell
+pip install -r requirements.txt
+```
+
+```python
+# It can't be
+```
+
+## Build
+
+> To build C++ code, run this
+
+```shell
+./premake5 gmake
+cd Build/gmake/
+make -j -l config=release
+```
+
+```python
+# It can't be
+```
+
+## Run
+
+> To spin up the API server, run this
+
+```shell
+python server.py
+```
 
 # Get Block Poses
 
@@ -124,3 +161,9 @@ The body of POST should be a raw JSON string, see Python code for example data.
 <aside class="notice">
 Expect about 40 seconds to get answer.
 </aside>
+
+# Q&A
+
+## Why don't use ROS to communicate?
+
+Because ROS Kinetic does not support Python3.
