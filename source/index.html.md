@@ -11,52 +11,9 @@ toc_footers:
 search: true
 ---
 
-# Introduction
-
-For more detailed explanation of this optimizer, refer to [upstream's REAMDE written by Leo and Alex](https://github.com/leonidk/Box2D/blob/master/README.md). This one is a simplified version.
-
-# Install, Build and Run
-
-## Install dependencies
-
-Create a virtual environment of Python3. Python2 is not capatible since [Unpacking Argument Lists](https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists) is not available in Python2. How to create a virtual environment? It's 1:30 a.m. and I'm too tired. just search on Google and learn something.
-
-> To install python dependencies, use this code:
-
-```shell
-pip install -r requirements.txt
-```
-
-```python
-# It can't be
-```
-
-## Build
-
-> To build C++ code, run this
-
-```shell
-./premake5 gmake
-cd Build/gmake/
-make -j -l config=release
-```
-
-```python
-# It can't be
-```
-
-## Run
-
-> To spin up the API server, run this
-
-```shell
-python server.py
-```
-
 # Get Block Poses
 
 > To get pose, use this code:
-
 
 ```python
 # Install requests first, i.e. pip install requests
@@ -98,17 +55,19 @@ curl -H "Content-Type: application/json" -X POST -d '{"destination":{"x":0.6,"y"
 ```json
 {
     "destination": {
-        "x": 10,
-        "y": 10.5
+        "x": 0.6,
+        "y": 0.2,
+        "width": 0.15,
+        "height": 0.1
     },
     "bounds": {
         "x": [
-            -40,
-            20
+            -0.8,
+            0.8
         ],
         "y": [
             0,
-            40
+            1.6
         ],
         "rotation": [
             0,
@@ -118,27 +77,38 @@ curl -H "Content-Type: application/json" -X POST -d '{"destination":{"x":0.6,"y"
     "n_obstacles": 3,
     "obstacles": [
         {
-            "width": 4.0,
-            "height": 0.8,
-            "x": -9.236634994986835,
-            "y": 18.80205961937183,
-            "rotation": 15.12052944790599
+            "width": 0.05,
+            "height": 0.24,
+            "x": -0.5588995672175655,
+            "y": 1.1043541047952923,
+            "rotation": 13.823030632598789
         },
         {
-            "width": 4.0,
-            "height": 0.8,
-            "x": -7.696743695787747,
-            "y": 18.07787349775663,
-            "rotation": 13.93119631927455
+            "width": 0.05,
+            "height": 0.24,
+            "x": 0.6686917139357296,
+            "y": 0.6793950132973555,
+            "rotation": 18.732470832091693
         },
         {
-            "width": 4.0,
-            "height": 0.8,
-            "x": -10.06786265843493,
-            "y": 18.43501197009068,
-            "rotation": 13.937406748489341
+            "width": 0.05,
+            "height": 0.24,
+            "x": -0.02703522727968692,
+            "y": 0.5507303787450926,
+            "rotation": 7.6811874823266315
         }
-    ]
+    ],
+    "ball": {
+        "radius": 0.01,
+        "location": [
+            -0.6,
+            1.5
+        ],
+        "linear_velocity": [
+            0.3,
+            -0.1
+        ]
+    }
 }
 ```
 
@@ -161,6 +131,37 @@ The body of POST should be a raw JSON string, see Python code for example data.
 <aside class="notice">
 Expect about 40 seconds to get answer.
 </aside>
+
+# Visualize
+
+> To visualize on Mac, use this code:
+
+```python
+# Install requests first, i.e. pip install requests
+import requests
+r = requests.post('http://localhost:5000/visualize', json=optimizedEnv)
+r.json()
+```
+
+```shell
+curl -H "Content-Type: application/json" -X POST -d '{"destination":{"x":0.6,"y":0.2,"width":0.15,"height":0.1},"bounds":{"x":[-0.8,0.8],"y":[0,1.6],"rotation":[0,31.4159265359]},"n_obstacles":3,"obstacles":[{"width":0.05,"height":0.24,"x":-0.5588995672175655,"y":1.1043541047952923,"rotation":13.823030632598789},{"width":0.05,"height":0.24,"x":0.6686917139357296,"y":0.6793950132973555,"rotation":18.732470832091693},{"width":0.05,"height":0.24,"x":-0.02703522727968692,"y":0.5507303787450926,"rotation":7.6811874823266315}],"ball":{"radius":0.01,"location":[-0.6,1.5],"linear_velocity":[0.3,-0.1]}}' http://localhost:5000/visualize
+```
+
+This endpoint render the simulation in host machine (Mac).
+
+### HTTP Request
+
+`POST http://localhost:5000/visualize`
+
+#### Header
+
+Key | Value
+--------- | -------
+Content-Type | application/json
+
+#### Body
+
+The body of POST should be a raw JSON string, see Shell code for example data.
 
 # Q&A
 
